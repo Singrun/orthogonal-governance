@@ -1,9 +1,9 @@
 # 正交治理：超大型系统的熵减工程学 (Orthogonal Governance)
 
-![Link Check](https://github.com/<your-org-or-user>/orthogonal-governance/actions/workflows/link-check.yml/badge.svg)
-![Codespell](https://github.com/<your-org-or-user>/orthogonal-governance/actions/workflows/codespell.yml/badge.svg)
-![Markdownlint](https://github.com/<your-org-or-user>/orthogonal-governance/actions/workflows/markdownlint.yml/badge.svg)
-![Build PDF](https://github.com/<your-org-or-user>/orthogonal-governance/actions/workflows/build-pdf.yml/badge.svg)
+![Link Check](https://github.com/Singrun/orthogonal-governance/actions/workflows/link-check.yml/badge.svg)
+![Codespell](https://github.com/Singrun/orthogonal-governance/actions/workflows/codespell.yml/badge.svg)
+![Markdownlint](https://github.com/Singrun/orthogonal-governance/actions/workflows/markdownlint.yml/badge.svg)
+![Build PDF](https://github.com/Singrun/orthogonal-governance/actions/workflows/build-pdf.yml/badge.svg)
 
 ## 为什么你的 KPI 全绿，但系统正在崩溃？
 
