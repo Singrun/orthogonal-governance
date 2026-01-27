@@ -9,13 +9,18 @@
 \usepackage{unicode-math}
 \setmathfont{$if(mathfont)$$mathfont$$else$Latin Modern Math$endif$}
 \usepackage{setspace}
-\onehalfspacing
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[LE,RO]{\small $if(title)$$title$$else$Orthogonal Governance$endif$}
-\fancyhead[LO,RE]{\small $if(author)$$author$$else$Author$endif$}
+\fancyhead[LE]{\small \leftmark}
+\fancyhead[RO]{\small \rightmark}
 \fancyfoot[CE,CO]{\small \thepage}
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyhead[LE]{\small \leftmark}
+  \fancyhead[RO]{\small \rightmark}
+  \fancyfoot[CE,CO]{\small \thepage}
+}
 \usepackage{hyperref}
 \hypersetup{
   colorlinks=false,
@@ -31,12 +36,17 @@
 \setcounter{tocdepth}{1}
 \renewcommand{\cftchapfont}{\bfseries}
 \renewcommand{\cftchappagefont}{\bfseries}
+\renewcommand{\cftdotsep}{2}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
 \usepackage{indentfirst}
 $if(linestretch)$
 $if(linestretch)$
 $endif$
 \usepackage{amsmath,amssymb,mathtools,bm}
 \numberwithin{equation}{chapter}
+\allowdisplaybreaks[3]
+\raggedbottom
+\setlength{\parskip}{0.5em}
 \setlength{\parindent}{2em}
 \emergencystretch=3em
 \usepackage{fvextra}
