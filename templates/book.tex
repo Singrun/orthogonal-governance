@@ -4,8 +4,9 @@
 \geometry{$if(geometry)$$geometry$$else$a4paper,inner=30mm,outer=20mm,top=25mm,bottom=25mm,bindingoffset=5mm$endif$}
 \usepackage{fontspec}
 \usepackage{xeCJK}
-\setmainfont{$if(mainfont)$$mainfont$$else$Noto Serif$endif$}
+\setmainfont{$if(mainfont)$$mainfont$$else$TeX Gyre Termes$endif$}
 \setCJKmainfont{$if(cjkmainfont)$$cjkmainfont$$else$Noto Serif CJK SC$endif$}
+\setmonofont{$if(monofont)$$monofont$$else$Latin Modern Mono$endif$}
 \xeCJKsetup{CJKmath=true, CheckSingle=true, AutoFakeBold=true, AutoFakeSlant=true}
 \usepackage{unicode-math}
 \setmathfont{$if(mathfont)$$mathfont$$else$Latin Modern Math$endif$}
@@ -22,6 +23,7 @@
   \fancyhead[RO]{\small \nouppercase{\rightmark}}
   \fancyfoot[CE,CO]{\small \thepage}
 }
+\renewcommand{\sectionmark}[1]{\markright{#1}}
 \usepackage{hyperref}
 \hypersetup{
   colorlinks=false,
@@ -45,19 +47,26 @@ $if(linestretch)$
 $endif$
 \usepackage{amsmath,amssymb,mathtools,bm}
 \numberwithin{equation}{chapter}
+\numberwithin{figure}{chapter}
+\numberwithin{table}{chapter}
 \allowdisplaybreaks[3]
 \raggedbottom
 \setlength{\parskip}{0.5em}
 \setlength{\parindent}{2em}
 \emergencystretch=3em
+\clubpenalty=10000
+\widowpenalty=10000
 \usepackage{fvextra}
 \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf}
+\renewcommand{\figurename}{图}
+\renewcommand{\tablename}{表}
 $endif$
 \begin{document}
 % Cover page
 \begin{titlepage}
   \centering
-  {\Huge $if(title)$$title$$else$正交治理$endif$\par}
   \vspace{1.5cm}
   {\Large $if(author)$$author$$else$郭星宇 著$endif$\par}
   \vspace{1.5cm}
@@ -69,6 +78,12 @@ $endif$
 % Front matter: TOC
 \frontmatter
 \tableofcontents
+$if(include_lof)$
+\listoffigures
+$endif$
+$if(include_lot)$
+\listoftables
+$endif$
 \clearpage
 % Copyright page
 \section*{版权说明}
