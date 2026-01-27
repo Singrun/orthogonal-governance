@@ -5,6 +5,9 @@
 \usepackage{xeCJK}
 \setmainfont{$if(mainfont)$$mainfont$$else$Noto Serif$endif$}
 \setCJKmainfont{$if(cjkmainfont)$$cjkmainfont$$else$Noto Serif CJK SC$endif$}
+\xeCJKsetup{CJKmath=true, CheckSingle=true, AutoFakeBold=true, AutoFakeSlant=true}
+\usepackage{unicode-math}
+\setmathfont{$if(mathfont)$$mathfont$$else$Latin Modern Math$endif$}
 \usepackage{setspace}
 \onehalfspacing
 \usepackage{fancyhdr}
@@ -30,7 +33,14 @@
 \renewcommand{\cftchappagefont}{\bfseries}
 \usepackage{indentfirst}
 $if(linestretch)$
-\setstretch{$linestretch$}
+$if(linestretch)$
+$endif$
+\usepackage{amsmath,amssymb,mathtools,bm}
+\numberwithin{equation}{chapter}
+\setlength{\parindent}{2em}
+\emergencystretch=3em
+\usepackage{fvextra}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
 $endif$
 \begin{document}
 % Cover page
@@ -56,4 +66,3 @@ $if(copyright)$$copyright$$else$本书以 Creative Commons CC BY-NC-SA 4.0（署
 % Main matter
 \mainmatter
 $body$
-\end{document}
