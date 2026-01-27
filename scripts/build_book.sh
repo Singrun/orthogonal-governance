@@ -41,24 +41,38 @@ files=(
   "docs/topics-faith.md"
   "docs/topics-sheltering-problem.md"
 )
-echo "# 正交治理" >> "${book_md}"
-echo "" >> "${book_md}"
-echo "郭星宇 著" >> "${book_md}"
-echo "" >> "${book_md}"
-echo "版本：${VERSION}" >> "${book_md}"
-echo "" >> "${book_md}"
-echo "日期：${DATE}" >> "${book_md}"
-echo "" >> "${book_md}"
-echo "---" >> "${book_md}"
-echo "" >> "${book_md}"
-echo "## 版权说明" >> "${book_md}"
-echo "" >> "${book_md}"
-echo "本书以 Creative Commons CC BY-NC-SA 4.0（署名-非商业性使用-相同方式共享）许可发布；详见仓库中的 LICENSE。" >> "${book_md}"
-echo "" >> "${book_md}"
-echo "---" >> "${book_md}"
-echo "" >> "${book_md}"
+# Cover page
+{
+  echo "# 正交治理"
+  echo ""
+  echo "郭星宇 著"
+  echo ""
+  echo "版本：${VERSION}"
+  echo ""
+  echo "日期：${DATE}"
+  echo ""
+} >> "${book_md}"
+echo "\\newpage" >> "${book_md}"
+
+# Table of contents (only H1)
+{
+  echo "\\setcounter{tocdepth}{1}"
+  echo "\\tableofcontents"
+} >> "${book_md}"
+echo "\\newpage" >> "${book_md}"
+
+# Copyright page
+{
+  echo "## 版权说明"
+  echo ""
+  echo "本书以 Creative Commons CC BY-NC-SA 4.0（署名-非商业性使用-相同方式共享）许可发布；详见仓库中的 LICENSE。"
+  echo ""
+} >> "${book_md}"
+echo "\\newpage" >> "${book_md}"
+
 for f in "${files[@]}"; do
   cat "${root_dir}/${f}" >> "${book_md}"
   echo "" >> "${book_md}"
+  echo "\\newpage" >> "${book_md}"
 done
 echo "Built ${book_md}" >&2

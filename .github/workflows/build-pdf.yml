@@ -18,9 +18,7 @@ jobs:
         run: ./scripts/build_book.sh
       - name: Generate PDF
         run: |
-          VERSION=$(cat VERSION || echo "dev")
-          DATE=$(date -I)
-          pandoc build/book.md -o build/Orthogonal-Governance.pdf --pdf-engine=xelatex --toc -V mainfont="Noto Sans CJK SC" -V geometry:margin=1in -V title="正交治理" -V author="郭星宇 著" -V date="${DATE}" -V version="${VERSION}"
+          pandoc build/book.md -o build/Orthogonal-Governance.pdf --pdf-engine=xelatex -V mainfont="Noto Sans CJK SC" -V geometry:margin=1in
       - name: Update repository PDF (docs/Orthogonal-Governance.pdf)
         run: |
           set -e

@@ -18,9 +18,7 @@ jobs:
         run: ./scripts/build_book.sh
       - name: Generate PDF
         run: |
-          TAG=${GITHUB_REF#refs/tags/}
-          DATE=$(date -I)
-          pandoc build/book.md -o build/Orthogonal-Governance.pdf --pdf-engine=xelatex --toc -V mainfont="Noto Sans CJK SC" -V geometry:margin=1in -V title="正交治理" -V author="郭星宇 著" -V date="${DATE}" -V version="${TAG}"
+          pandoc build/book.md -o build/Orthogonal-Governance.pdf --pdf-engine=xelatex -V mainfont="Noto Sans CJK SC" -V geometry:margin=1in
       - name: Update repository PDF
         run: |
           cp build/Orthogonal-Governance.pdf docs/Orthogonal-Governance.pdf
