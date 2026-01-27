@@ -18,7 +18,26 @@ jobs:
         run: ./scripts/build_book.sh
       - name: Generate PDF
         run: |
-          pandoc build/book.md -o build/Orthogonal-Governance.pdf --pdf-engine=xelatex -V CJKmainfont="Noto Sans CJK SC" -V mainfont="Noto Sans" -V geometry:a4paper,margin=25mm -V fontsize=12pt
+          TAG=${GITHUB_REF#refs/tags/}
+          DATE=$(date -I)
+          COPYRIGHT="本书以 Creative Commons CC BY-NC-SA 4.0（署名-非商业性使用-相同方式共享）许可发布；详见仓库中的 LICENSE。"
+          pandoc build/book.md -o build/Orthogonal-Governance.pdf \
+            --pdf-engine=xelatex \
+            --template templates/book.tex \
+            -V title="正交治理" \
+            -V author="郭星宇 著" \
+            -V date="${DATE}" \
+            -V version="${TAG}" \
+            -V pdftitle="正交治理" \
+            -V pdfauthor="郭星宇" \
+            -V pdfsubject="治理与系统工程" \
+            -V pdfkeywords="治理,控制论,信息论,博弈论" \
+            -V mainfont="Noto Serif" \
+            -V cjkmainfont="Noto Serif CJK SC" \
+            -V linestretch="1.3" \
+            -V geometry:a4paper,margin=25mm \
+            -V fontsize=12pt \
+            -V copyright="${COPYRIGHT}"
       - name: Update repository PDF
         run: |
           cp build/Orthogonal-Governance.pdf docs/Orthogonal-Governance.pdf

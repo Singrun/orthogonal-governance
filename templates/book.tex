@@ -1,0 +1,59 @@
+% Pandoc LaTeX template for professional A4 book output
+\documentclass[12pt,openright]{book}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\setmainfont{$if(mainfont)$$mainfont$$else$Noto Serif$endif$}
+\setCJKmainfont{$if(cjkmainfont)$$cjkmainfont$$else$Noto Serif CJK SC$endif$}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\small $if(title)$$title$$else$Orthogonal Governance$endif$}
+\fancyhead[LO,RE]{\small $if(author)$$author$$else$Author$endif$}
+\fancyfoot[CE,CO]{\small \thepage}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=false,
+  pdfborder={0 0 0},
+  pdftitle={$if(pdftitle)$$pdftitle$$else$Orthogonal Governance$endif$},
+  pdfauthor={$if(pdfauthor)$$pdfauthor$$else$Author$endif$},
+  pdfsubject={$if(pdfsubject)$$pdfsubject$$else$治理与系统工程$endif$},
+  pdfkeywords={$if(pdfkeywords)$$pdfkeywords$$else$治理,控制论,信息论,博弈论$endif$}
+}
+\usepackage{titlesec}
+\titleformat{\chapter}{\bfseries\LARGE}{\thechapter}{1em}{}
+\usepackage{tocloft}
+\setcounter{tocdepth}{1}
+\renewcommand{\cftchapfont}{\bfseries}
+\renewcommand{\cftchappagefont}{\bfseries}
+\usepackage{indentfirst}
+$if(linestretch)$
+\setstretch{$linestretch$}
+$endif$
+\begin{document}
+% Cover page
+\begin{titlepage}
+  \centering
+  {\Huge $if(title)$$title$$else$正交治理$endif$\par}
+  \vspace{1.5cm}
+  {\Large $if(author)$$author$$else$郭星宇 著$endif$\par}
+  \vspace{1.5cm}
+  {\large $if(version)$版本：$version$$endif$ \par}
+  {\large $if(date)$日期：$date$$endif$ \par}
+  \vfill
+\end{titlepage}
+\clearpage
+% Front matter: TOC
+\frontmatter
+\tableofcontents
+\clearpage
+% Copyright page
+\section*{版权说明}
+$if(copyright)$$copyright$$else$本书以 Creative Commons CC BY-NC-SA 4.0（署名-非商业性使用-相同方式共享）许可发布；详见仓库中的 LICENSE。$endif$
+\clearpage
+% Main matter
+\mainmatter
+$body$
+\end{document}
