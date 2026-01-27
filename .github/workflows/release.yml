@@ -18,7 +18,7 @@ jobs:
         run: ./scripts/build_book.sh
       - name: Generate PDF
         run: |
-          pandoc build/book.md -o build/Orthogonal-Governance.pdf --pdf-engine=xelatex -V mainfont="Noto Sans CJK SC" -V geometry:margin=1in
+          pandoc build/book.md -o build/Orthogonal-Governance.pdf --pdf-engine=xelatex -V CJKmainfont="Noto Sans CJK SC" -V mainfont="Noto Sans" -V geometry:a4paper,margin=25mm -V fontsize=12pt
       - name: Update repository PDF
         run: |
           cp build/Orthogonal-Governance.pdf docs/Orthogonal-Governance.pdf
