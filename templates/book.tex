@@ -1,6 +1,7 @@
 % Pandoc LaTeX template for professional A4 book output
-\documentclass[12pt,openright]{book}
-\usepackage[a4paper,margin=25mm]{geometry}
+\documentclass[12pt,openright,twoside]{book}
+\usepackage{geometry}
+\geometry{$if(geometry)$$geometry$$else$a4paper,inner=30mm,outer=20mm,top=25mm,bottom=25mm,bindingoffset=5mm$endif$}
 \usepackage{fontspec}
 \usepackage{xeCJK}
 \setmainfont{$if(mainfont)$$mainfont$$else$Noto Serif$endif$}
@@ -12,13 +13,13 @@
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[LE]{\small \leftmark}
-\fancyhead[RO]{\small \rightmark}
+\fancyhead[LE]{\small \nouppercase{\leftmark}}
+\fancyhead[RO]{\small \nouppercase{\rightmark}}
 \fancyfoot[CE,CO]{\small \thepage}
 \fancypagestyle{plain}{
   \fancyhf{}
-  \fancyhead[LE]{\small \leftmark}
-  \fancyhead[RO]{\small \rightmark}
+  \fancyhead[LE]{\small \nouppercase{\leftmark}}
+  \fancyhead[RO]{\small \nouppercase{\rightmark}}
   \fancyfoot[CE,CO]{\small \thepage}
 }
 \usepackage{hyperref}
