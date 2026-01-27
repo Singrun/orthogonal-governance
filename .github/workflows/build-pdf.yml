@@ -13,7 +13,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y pandoc texlive-latex-base texlive-fonts-recommended texlive-latex-extra texlive-xetex texlive-fonts-extra fonts-noto-cjk
+          sudo apt-get install -y pandoc texlive-latex-base texlive-fonts-recommended texlive-latex-extra texlive-xetex texlive-fonts-extra texlive-lang-chinese fonts-noto-cjk
       - name: Build book markdown
         run: ./scripts/build_book.sh
       - name: Generate PDF
