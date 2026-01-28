@@ -17,7 +17,7 @@ jobs:
       - name: Install dependencies (APT)
         run: |
           sudo apt-get update
-          sudo apt-get install -y pandoc fonts-noto-cjk fonts-noto-serif curl
+          sudo apt-get install -y pandoc fonts-noto-cjk fonts-noto-core curl
 
       - name: Install Tectonic (Official Script)
         run: |
