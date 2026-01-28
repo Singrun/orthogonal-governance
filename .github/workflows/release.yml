@@ -1,61 +1,41 @@
 name: Release
+
 on:
   push:
     tags:
       - "v*"
+
 permissions:
   contents: write
+
 jobs:
   release:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-      - name: Setup Tectonic
-        uses: wftjoke/setup-tectonic@v1
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Install dependencies
+      
+      - name: Install dependencies (APT)
         run: |
           sudo apt-get update
-          sudo apt-get install -y pandoc fonts-noto-cjk
+          sudo apt-get install -y pandoc fonts-noto-cjk curl
+
+      - name: Install Tectonic (Official Script)
+        run: |
+          curl --proto '=https' --tlsv1.2 -fsSL https://drop-sh.fullyjustified.net | sh
+          sudo mv tectonic /usr/local/bin/
+          tectonic --version
+
       - name: Preflight check
         run: |
           pandoc --version
-          tectonic --version
           fc-list | grep -q "Noto Serif CJK" || (echo "Noto Serif CJK font not found" && exit 1)
+
       - name: Build book markdown
         run: ./scripts/build_book.sh
+
       - name: Generate PDF
-        run: |
-          TAG=${GITHUB_REF#refs/tags/}
-          DATE=$(date -I)
-          COPYRIGHT="本书以 Creative Commons CC BY-NC-SA 4.0（署名-非商业性使用-相同方式共享）许可发布；详见仓库中的 LICENSE。"
-          set -o pipefail
-          pandoc build/book.md -o build/Orthogonal-Governance.pdf \
-            --pdf-engine=tectonic \
-            --template templates/book.tex \
-            -f markdown+tex_math_dollars+raw_tex \
-            --top-level-division=chapter \
-            -V title="正交治理" \
-            -V author="郭星宇 著" \
-            -V date="${DATE}" \
-            -V version="${TAG}" \
-            -V pdftitle="正交治理" \
-            -V pdfauthor="郭星宇" \
-            -V pdfsubject="治理与系统工程" \
-            -V pdfkeywords="治理,控制论,信息论,博弈论" \
-            -V mainfont="Noto Serif" \
-            -V cjkmainfont="Noto Serif CJK SC" \
-            -V monofont="Latin Modern Mono" \
-            -V linestretch="1.3" \
-            -V geometry="a4paper,inner=30mm,outer=20mm,top=25mm,bottom=25mm,bindingoffset=5mm" \
-            -V fontsize=12pt \
-            -V copyright="${COPYRIGHT}" 2>&1 | tee build/pandoc-build.log
-          if grep -q "LaTeX Error" build/pandoc-build.log; then
-            echo "LaTeX errors detected:"
-            grep "LaTeX Error" -n build/pandoc-build.log || true
-            exit 1
-          fi
+        run: ./scripts/generate_pdf.sh
+
       - name: Update repository PDF
         run: |
           cp build/Orthogonal-Governance.pdf docs/Orthogonal-Governance.pdf
@@ -64,6 +44,7 @@ jobs:
           git add docs/Orthogonal-Governance.pdf
           git commit -m "chore(release): update docs PDF for ${GITHUB_REF#refs/tags/}"
           git push
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
