@@ -18,11 +18,13 @@ if [[ "$(uname)" == "Darwin" ]]; then
   # macOS defaults
   MAINFONT="Times New Roman"
   CJKMAINFONT="Songti SC"
-  echo "🍎 macOS detected: Using '${MAINFONT}' and '${CJKMAINFONT}'"
+  MONOFONT="Menlo"
+  echo "🍎 macOS detected: Using '${MAINFONT}', '${CJKMAINFONT}', '${MONOFONT}'"
 else
   # Linux/CI defaults
   MAINFONT="Noto Serif"
   CJKMAINFONT="Noto Serif CJK SC"
+  MONOFONT="Latin Modern Mono"
 fi
 
 # Use pipefail to catch errors in the pipeline
@@ -45,7 +47,7 @@ pandoc build/book.md -o build/Orthogonal-Governance.pdf \
   -V pdfkeywords="治理,控制论,信息论,博弈论" \
   -V mainfont="${MAINFONT}" \
   -V cjkmainfont="${CJKMAINFONT}" \
-  -V monofont="Latin Modern Mono" \
+  -V monofont="${MONOFONT}" \
   -V linestretch="1.3" \
   -V geometry="a4paper,inner=30mm,outer=20mm,top=25mm,bottom=25mm,bindingoffset=5mm" \
   -V fontsize=12pt \
