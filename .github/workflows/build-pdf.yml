@@ -14,6 +14,14 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y pandoc texlive-full fonts-noto-cjk
+      - name: Preflight check
+        run: |
+          pandoc --version
+          xelatex --version
+          kpsewhich xeCJK.sty
+          kpsewhich booktabs.sty
+          kpsewhich longtable.sty
+          fc-list | grep -q "Noto Serif CJK" || (echo "Noto Serif CJK font not found" && exit 1)
       - name: Build book markdown
         run: ./scripts/build_book.sh
       - name: Generate PDF
@@ -24,6 +32,9 @@ jobs:
           set -o pipefail
           pandoc build/book.md -o build/Orthogonal-Governance.pdf \
             --pdf-engine=xelatex \
+            --pdf-engine-opt=-halt-on-error \
+            --pdf-engine-opt=-file-line-error \
+            --pdf-engine-opt=-interaction=nonstopmode \
             --template templates/book.tex \
             -f markdown+tex_math_dollars+raw_tex \
             --top-level-division=chapter \
