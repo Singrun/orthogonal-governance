@@ -24,6 +24,7 @@ jobs:
           pandoc build/book.md -o build/Orthogonal-Governance.pdf \
             --pdf-engine=xelatex \
             --template templates/book.tex \
+            -f markdown+tex_math_dollars+raw_tex \
             --top-level-division=chapter \
             -V title="正交治理" \
             -V author="郭星宇 著" \
