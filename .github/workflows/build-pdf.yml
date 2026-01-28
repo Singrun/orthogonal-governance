@@ -13,7 +13,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y pandoc texlive-latex-base texlive-fonts-recommended texlive-latex-extra texlive-xetex texlive-fonts-extra texlive-lang-chinese fonts-noto-cjk
+          sudo apt-get install -y pandoc texlive-full fonts-noto-cjk
       - name: Build book markdown
         run: ./scripts/build_book.sh
       - name: Generate PDF
@@ -21,6 +21,7 @@ jobs:
           VERSION=$(cat VERSION || echo "dev")
           DATE=$(date -I)
           COPYRIGHT="本书以 Creative Commons CC BY-NC-SA 4.0（署名-非商业性使用-相同方式共享）许可发布；详见仓库中的 LICENSE。"
+          set -o pipefail
           pandoc build/book.md -o build/Orthogonal-Governance.pdf \
             --pdf-engine=xelatex \
             --template templates/book.tex \
@@ -40,7 +41,12 @@ jobs:
             -V linestretch="1.3" \
             -V geometry="a4paper,inner=30mm,outer=20mm,top=25mm,bottom=25mm,bindingoffset=5mm" \
             -V fontsize=12pt \
-            -V copyright="${COPYRIGHT}"
+            -V copyright="${COPYRIGHT}" 2>&1 | tee build/pandoc-build.log
+          if grep -q "LaTeX Error" build/pandoc-build.log; then
+            echo "LaTeX errors detected:"
+            grep "LaTeX Error" -n build/pandoc-build.log || true
+            exit 1
+          fi
       - name: Update repository PDF (docs/Orthogonal-Governance.pdf)
         run: |
           set -e
