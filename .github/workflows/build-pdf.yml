@@ -10,17 +10,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Setup Tectonic
+        uses: tectonic-typesetting/setup-tectonic@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y pandoc tectonic fonts-noto-cjk
+          sudo apt-get install -y pandoc fonts-noto-cjk
       - name: Preflight check
         run: |
           pandoc --version
-          xelatex --version
-          kpsewhich xeCJK.sty
-          kpsewhich booktabs.sty
-          kpsewhich longtable.sty
+          tectonic --version
           fc-list | grep -q "Noto Serif CJK" || (echo "Noto Serif CJK font not found" && exit 1)
       - name: Build book markdown
         run: ./scripts/build_book.sh
