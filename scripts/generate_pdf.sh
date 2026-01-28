@@ -13,6 +13,18 @@ echo "Starting PDF generation with Tectonic..."
 echo "Version: ${VERSION}"
 echo "Date: ${DATE}"
 
+# Detect OS and select fonts
+if [[ "$(uname)" == "Darwin" ]]; then
+  # macOS defaults
+  MAINFONT="Times New Roman"
+  CJKMAINFONT="Songti SC"
+  echo "🍎 macOS detected: Using '${MAINFONT}' and '${CJKMAINFONT}'"
+else
+  # Linux/CI defaults
+  MAINFONT="Noto Serif"
+  CJKMAINFONT="Noto Serif CJK SC"
+fi
+
 # Use pipefail to catch errors in the pipeline
 set -o pipefail
 
@@ -31,8 +43,8 @@ pandoc build/book.md -o build/Orthogonal-Governance.pdf \
   -V pdfauthor="郭星宇" \
   -V pdfsubject="治理与系统工程" \
   -V pdfkeywords="治理,控制论,信息论,博弈论" \
-  -V mainfont="Noto Serif" \
-  -V cjkmainfont="Noto Serif CJK SC" \
+  -V mainfont="${MAINFONT}" \
+  -V cjkmainfont="${CJKMAINFONT}" \
   -V monofont="Latin Modern Mono" \
   -V linestretch="1.3" \
   -V geometry="a4paper,inner=30mm,outer=20mm,top=25mm,bottom=25mm,bindingoffset=5mm" \
