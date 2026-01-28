@@ -42,9 +42,7 @@
 \renewcommand{\cftdotsep}{2}
 \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
 \usepackage{indentfirst}
-$if(linestretch)$
-$if(linestretch)$
-$endif$
+\setstretch{$if(linestretch)$$linestretch$$else$1.3$endif$}
 \providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \usepackage{amsmath,mathtools,bm}
 \numberwithin{equation}{chapter}
@@ -71,11 +69,12 @@ $endif$
 \captionsetup{font=small,labelfont=bf}
 \renewcommand{\figurename}{图}
 \renewcommand{\tablename}{表}
-$endif$
 \begin{document}
 % Cover page
 \begin{titlepage}
   \centering
+  \vspace*{2cm}
+  {\Huge\bfseries $if(title)$$title$$else$正交治理$endif$\par}
   \vspace{1.5cm}
   {\Large $if(author)$$author$$else$郭星宇 著$endif$\par}
   \vspace{1.5cm}
