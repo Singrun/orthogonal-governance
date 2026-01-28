@@ -13,7 +13,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y pandoc texlive-full fonts-noto-cjk
+          sudo apt-get install -y pandoc tectonic fonts-noto-cjk
       - name: Preflight check
         run: |
           pandoc --version
@@ -31,10 +31,7 @@ jobs:
           COPYRIGHT="本书以 Creative Commons CC BY-NC-SA 4.0（署名-非商业性使用-相同方式共享）许可发布；详见仓库中的 LICENSE。"
           set -o pipefail
           pandoc build/book.md -o build/Orthogonal-Governance.pdf \
-            --pdf-engine=xelatex \
-            --pdf-engine-opt=-halt-on-error \
-            --pdf-engine-opt=-file-line-error \
-            --pdf-engine-opt=-interaction=nonstopmode \
+            --pdf-engine=tectonic \
             --template templates/book.tex \
             -f markdown+tex_math_dollars+raw_tex \
             --top-level-division=chapter \
