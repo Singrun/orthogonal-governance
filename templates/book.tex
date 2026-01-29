@@ -9,7 +9,9 @@
 \setmonofont{$if(monofont)$$monofont$$else$Latin Modern Mono$endif$}
 \xeCJKsetup{CJKmath=true, CheckSingle=true, AutoFakeBold=true, AutoFakeSlant=true}
 \usepackage{unicode-math}
-\setmathfont{$if(mathfont)$$mathfont$$else$Latin Modern Math$endif$}
+$if(mathfont)$
+  \setmathfont{$mathfont$}
+$endif$
 \usepackage{setspace}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
@@ -42,21 +44,30 @@
 \renewcommand{\cftdotsep}{2}
 \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
 \usepackage{indentfirst}
-\setstretch{$if(linestretch)$$linestretch$$else$1.3$endif$}
 \providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \usepackage{amsmath,mathtools,bm}
+$if(numbersections)$
 \numberwithin{equation}{chapter}
 \numberwithin{figure}{chapter}
 \numberwithin{table}{chapter}
+$endif$
 \allowdisplaybreaks[3]
+\usepackage{fvextra}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+\usepackage{lineno}
+$if(linenumbers)$
+\linenumbers
+\modulolinenumbers[5]
+$endif$
+$if(linestretch)$
+\setstretch{$linestretch$}
+$endif$
 \raggedbottom
 \setlength{\parskip}{0.5em}
 \setlength{\parindent}{2em}
 \emergencystretch=3em
 \clubpenalty=10000
 \widowpenalty=10000
-\usepackage{fvextra}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
 \usepackage{longtable}
 \usepackage{booktabs}
 \usepackage{graphicx}
@@ -67,8 +78,8 @@
 \usepackage{array}
 \usepackage{caption}
 \captionsetup{font=small,labelfont=bf}
-\renewcommand{\figurename}{图}
-\renewcommand{\tablename}{表}
+\renewcommand{\figurename}{$if(figurename)$$figurename$$else$图$endif$}
+\renewcommand{\tablename}{$if(tablename)$$tablename$$else$表$endif$}
 \usepackage{newunicodechar}
 \newunicodechar{−}{\ensuremath{-}}
 \newunicodechar{≥}{\ensuremath{\ge}}

@@ -19,12 +19,15 @@ if [[ "$(uname)" == "Darwin" ]]; then
   MAINFONT="Times New Roman"
   CJKMAINFONT="Songti SC"
   MONOFONT="Menlo"
-  echo "🍎 macOS detected: Using '${MAINFONT}', '${CJKMAINFONT}', '${MONOFONT}'"
+  # Unset MATHFONT to let template default to Latin Modern Math (Tectonic bundle)
+  MATHFONT="" 
+  echo "🍎 macOS detected: Using '${MAINFONT}', '${CJKMAINFONT}', '${MONOFONT}' (Math: bundle default)"
 else
   # Linux/CI defaults
   MAINFONT="Noto Serif"
   CJKMAINFONT="Noto Serif CJK SC"
   MONOFONT="Latin Modern Mono"
+  MATHFONT="Latin Modern Math"
 fi
 
 # Use pipefail to catch errors in the pipeline
@@ -37,6 +40,9 @@ pandoc build/book.md -o build/Orthogonal-Governance.pdf \
   --template templates/book.tex \
   -f markdown+tex_math_dollars+raw_tex \
   --top-level-division=chapter \
+  --number-sections \
+  -V figurename="图" \
+  -V tablename="表" \
   -V title="正交治理" \
   -V author="郭星宇 著" \
   -V date="${DATE}" \
@@ -48,6 +54,7 @@ pandoc build/book.md -o build/Orthogonal-Governance.pdf \
   -V mainfont="${MAINFONT}" \
   -V cjkmainfont="${CJKMAINFONT}" \
   -V monofont="${MONOFONT}" \
+  -V mathfont="${MATHFONT}" \
   -V linestretch="1.3" \
   -V geometry="a4paper,inner=30mm,outer=20mm,top=25mm,bottom=25mm,bindingoffset=5mm" \
   -V fontsize=12pt \
