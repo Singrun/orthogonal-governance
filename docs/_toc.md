@@ -39,6 +39,7 @@
 - 附录E：[OGI的数学基础——对抗衰减的动力学](./appendix-e-ogi-math-foundation.md)
 - 附录F：[从鹦鹉到科学家——下一代AI的正交跃迁](./appendix-f-parrot-to-scientist-next-gen-ai.md)
 - 附录G：[正交治理的数学原理](./appendix-g-math-principles-orthogonal-governance.md)
+- 附录H：[工程化落地指南——从理论到实践](./appendix-h-implementation-guide.md)
 
 ## 专题
 - [信仰](./topics-faith.md)
