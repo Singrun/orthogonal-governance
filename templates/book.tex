@@ -38,7 +38,11 @@ $endif$
 \usepackage{titlesec}
 \titleformat{\chapter}{\bfseries\LARGE}{\thechapter}{1em}{}
 \usepackage{tocloft}
-\setcounter{tocdepth}{1}
+$if(toc-depth)$
+\setcounter{tocdepth}{$toc-depth$}
+$else$
+\setcounter{tocdepth}{0}
+$endif$
 \renewcommand{\cftchapfont}{\bfseries}
 \renewcommand{\cftchappagefont}{\bfseries}
 \renewcommand{\cftdotsep}{2}
