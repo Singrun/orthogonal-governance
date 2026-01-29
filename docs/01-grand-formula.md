@@ -13,7 +13,29 @@
 - **$\vec{V}_{biz}$（业务向量）**：代表系统追求的目标方向（如增长、速度、利润）。
 - **$\vec{V}_{gov}$（治理向量）**：代表系统自我修正的力量（如审计、风控、SRE）。
 
-### 1.2 治理效能公式
+### 1.2 几何图解
+
+```mermaid
+graph LR
+    subgraph 共线性陷阱 [Collinearity Trap: θ → 0]
+        direction LR
+        B1[业务 V_biz] ==>|同向/盲区重叠| G1[治理 V_gov]
+        G1 -.->|失去独立视角| B1
+        style G1 fill:#f9f,stroke:#333,stroke-width:2px
+    end
+
+    subgraph 正交治理 [Orthogonal Governance: θ → 90]
+        direction TB
+        B2[业务 V_biz]
+        G2[治理 V_gov]
+        B2 -->|盲区| BlindSpot
+        G2 -->|侧向观测| BlindSpot
+        B2 ~~~ G2
+        linkStyle 3 stroke-width:0px;
+    end
+```
+
+### 1.3 治理效能公式
 治理的有效性（Effectiveness, $E$）不是治理资源的投入量（$|\vec{V}_{gov}|$），而是它在正交维度上的投影：
 
 $$ E = |\vec{V}_{gov}| \cdot \sin(\theta) $$
