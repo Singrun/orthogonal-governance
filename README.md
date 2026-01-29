@@ -2,6 +2,8 @@
 
 ![CI Status](https://github.com/Singrun/orthogonal-governance/actions/workflows/build-pdf.yml/badge.svg)
 
+> **[English README](README_EN.md)**
+
 ## 为什么你的 KPI 全绿，但系统正在崩溃？
 
 这不是一本给 CEO 看的管理鸡汤，这是一本给系统构建者看的病理学报告。我们用控制论、博弈论和热力学，解构大型组织与复杂技术系统为何会走向“高熵有序”的死寂，并提出“正交治理”作为反熵增、重启活性的工程化方案。
@@ -69,6 +71,7 @@
 ```
 orthogonal-governance/
 ├── README.md           # 项目宣言（Manifesto）
+├── README_EN.md        # 英文宣言（English Manifesto）
 ├── docs/               # 规范化文件名的章节/附录/专题
 │   └── _toc.md         # 目录与链接映射（规范化阅读入口）
 ├── glossary.md         # 术语表（CSI、OGI、高熵有序等）
