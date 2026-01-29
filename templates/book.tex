@@ -46,11 +46,6 @@ $endif$
 \usepackage{indentfirst}
 \providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \usepackage{amsmath,mathtools,bm}
-$if(numbersections)$
-\numberwithin{equation}{chapter}
-\numberwithin{figure}{chapter}
-\numberwithin{table}{chapter}
-$endif$
 \allowdisplaybreaks[3]
 \usepackage{fvextra}
 \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
@@ -85,6 +80,7 @@ $endif$
 \newunicodechar{≥}{\ensuremath{\ge}}
 \newunicodechar{≤}{\ensuremath{\le}}
 \newunicodechar{→}{\ensuremath{\to}}
+\newcounter{none}
 \begin{document}
 % Cover page
 \begin{titlepage}
@@ -116,3 +112,4 @@ $if(copyright)$$copyright$$else$本书以 Creative Commons CC BY-NC-SA 4.0（署
 % Main matter
 \mainmatter
 $body$
+\end{document}

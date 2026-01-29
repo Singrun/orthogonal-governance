@@ -40,7 +40,6 @@ pandoc build/book.md -o build/Orthogonal-Governance.pdf \
   --template templates/book.tex \
   -f markdown+tex_math_dollars+raw_tex \
   --top-level-division=chapter \
-  --number-sections \
   -V figurename="图" \
   -V tablename="表" \
   -V title="正交治理" \
