@@ -44,4 +44,5 @@
 ## 专题
 - [信仰](./topics-faith.md)
 - [原则坍塌](./topics-principle-collapse.md)
+- [信仰与原则的异同](./topics-faith-vs-principles.md)
 - [包庇问题](./topics-sheltering-problem.md)
