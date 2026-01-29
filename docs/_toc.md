@@ -43,4 +43,5 @@
 
 ## 专题
 - [信仰](./topics-faith.md)
+- [原则坍塌](./topics-principle-collapse.md)
 - [包庇问题](./topics-sheltering-problem.md)
