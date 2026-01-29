@@ -4,6 +4,8 @@ on:
   workflow_dispatch:
   push:
     branches: [ main ]
+    tags:
+      - 'v*'
 
 permissions:
   contents: write
@@ -81,3 +83,14 @@ jobs:
             git commit -m "chore(pdf): update Orthogonal-Governance.pdf"
             git push
           fi
+
+      - name: Create Release on Tag
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v1
+        with:
+          files: build/Orthogonal-Governance.pdf
+          body_path: CHANGELOG.md
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
