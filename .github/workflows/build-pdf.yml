@@ -9,7 +9,39 @@ permissions:
   contents: write
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Markdown Lint
+        uses: avto-dev/markdown-lint@v1
+        with:
+          config: .markdownlint.json
+          ignore: "node_modules"
+  
+  spellcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Codespell
+        uses: codespell-project/actions-codespell@v2
+        with:
+          check_filenames: true
+          skip: ".git,build"
+          ignore_words_list: OGI,CSI,OGI's,CSIs
+
+  linkcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Link Checker
+        uses: lycheeverse/lychee-action@v1
+        with:
+          args: --verbose --no-progress './**/*.md' './**/*.html'
+          fail: true
+
   build:
+    needs: [lint, spellcheck, linkcheck]
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
